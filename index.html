@@ -382,19 +382,19 @@
               <div class="contact_form-container">
                 <div>
                   <div>
-                    <input type="text" placeholder="Full Name" />
+                    <input type="text" placeholder="Full Name" id="fullname"/>
                   </div>
                   <div>
-                    <input type="email" placeholder="Email " />
+                    <input type="email" placeholder="Email " id="email"/>
                   </div>
                   <div>
-                    <input type="text" placeholder="Phone Number" />
+                    <input type="text" id="pnumber" placeholder="Phone Number" />
                   </div>
                   <div class="">
-                    <input type="text" placeholder="Message" class="message_input" />
+                    <input type="text" id="message_input" placeholder="Message" class="message_input" />
                   </div>
                   <div class="btn-box ">
-                    <button type="submit">
+                    <button type="submit" id="sendmail">
                       Send
                     </button>
                   </div>
@@ -407,7 +407,23 @@
     </div>
   </section>
 <script>
-
+  const sendMail = (e) => {
+    e.preventDefault()
+    const message = encodeURIComponent(document.getElementById('message_input').value)
+    Email.send({
+        Host : "smtp.yourisp.com",
+        Username : "username",
+        Password : "password",
+        To : 'them@website.com',
+        From : "you@isp.com",
+        Subject : encodeURIComponent("This is my subject"),
+        Body : message
+    }).then(
+      message => alert(message)
+    ).catch( err => {
+        alert(err)
+    });
+}
 </script>
   <!-- end contact section -->
 
